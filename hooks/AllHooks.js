@@ -229,9 +229,10 @@ export const useAllcoupon = (type) => {
   return { allData, loadData, error, setRefetchPost };
 };
 
-// FOR CAROUSEL
+// GET CAROUSEL
 export const useCarousel = () => {
   const [carousels, setCarousels] = useState([]);
+  const [refetchCarousel, setRefetchCarousel] = useState(0);
 
   useEffect(() => {
     fetch(`${mainURL}/carousel`)
@@ -239,8 +240,8 @@ export const useCarousel = () => {
       .then((data) => {
         setCarousels(data?.data?.carousel);
       });
-  }, []);
-  return { carousels };
+  }, [refetchCarousel]);
+  return { carousels, setRefetchCarousel };
 };
 
 //Get FAVOURITE STORE FROM FAVOURITE API

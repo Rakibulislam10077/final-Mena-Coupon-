@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "mena-coupon",
+    "name": "Mena Coupon",
     "slug": "mena-coupon",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -18,7 +18,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#283d27"
+        "backgroundColor": "#ffffff"
       },
       "package": "com.expertsquad.net.menacoupon"
     },

@@ -12,6 +12,7 @@ const CarouselItem = ({ item }) => {
   return (
     <TouchableOpacity style={{ marginBottom: 10, paddingHorizontal: 20 }}>
       <Image
+        resizeMode="contain"
         style={{ width: "100%", borderRadius: 10, height: 200 }}
         source={{ uri: item?.photoURL }}
       />
