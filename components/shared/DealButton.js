@@ -3,14 +3,21 @@ import React from "react";
 import { useReabuildCount } from "../../hooks/AllHooks";
 import { useNavigation } from "@react-navigation/native";
 
-const dealButton = ({ data, item, POitem }) => {
+const dealButton = ({ data, item, POitem, storeItem, store__data }) => {
   const navigation = useNavigation();
   const { getRevealedCount } = useReabuildCount();
   const handleButton = () => {
     getRevealedCount(data?._id || POitem?._id || item?._id);
-    navigation.navigate("HomeCouponItem", { ...data, ...POitem, ...item });
+    navigation.navigate("HomeCouponItem", {
+      ...data,
+      ...POitem,
+      ...item,
+      ...storeItem,
+      // ...store__data,
+    });
   };
 
+  // console.log(storeItem);
   return (
     <TouchableOpacity style={styles.buttonCon} onPress={() => handleButton()}>
       <Text style={styles.buttonText}>Buy It</Text>

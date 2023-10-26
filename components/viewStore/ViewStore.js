@@ -36,8 +36,7 @@ import {
   useStore,
 } from "../../hooks/AllHooks";
 import { Alert } from "react-native";
-
-const ViewStore = (props, isFavourite) => {
+const ViewStore = (props, isFavourite, storeExternalLink) => {
   // data from coupon file in screen folder
   const item = props?.route?.params; //prop data
   const navigation = useNavigation(); // navigation
@@ -50,7 +49,6 @@ const ViewStore = (props, isFavourite) => {
   const { getStoreById } = useGetStoreById();
   const { getStoreByStoreName } = useGetStoreByStoreName();
   const bottomSheetHeight = Dimensions.get("screen").height;
-
   const bottomSheetModalRef = useRef(null);
   const snapPoints = useMemo(() => [550], []);
   const handlePresentModalPress = useCallback(() => {
@@ -60,7 +58,7 @@ const ViewStore = (props, isFavourite) => {
   const handleDismissModal = useCallback(() => {
     bottomSheetModalRef.current?.dismiss();
   }, []);
-
+  // console.log(item);
   useEffect(() => {
     const handleGetStoreById = async () => {
       const fetchedStore = item?.store?.storeName
@@ -75,6 +73,7 @@ const ViewStore = (props, isFavourite) => {
   //   await fvStoreData(item);
   //   setRefetch((prev) => prev + 1);
   // };
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <BottomSheetModalProvider>
@@ -125,7 +124,7 @@ const ViewStore = (props, isFavourite) => {
           <View style={customStyle.storeBranding}>
             <TouchableOpacity style={[customStyle.storeImgCon]}>
               <Image
-                style={{ width: "80%", height: 50, borderRadius: 5 }}
+                style={{ width: 60, height: 60, borderRadius: 5 }}
                 resizeMode="contain"
                 source={{
                   uri:
@@ -362,7 +361,11 @@ const ViewStore = (props, isFavourite) => {
             </Text>
           </View>
           <TouchableOpacity
-            onPress={() => Linking.openURL(item?.storeExternalLink)}
+            onPress={() =>
+              Linking.openURL(
+                item?.storeExternalLink || item?.store?.storeExternalLink
+              )
+            }
             style={customStyle.visitBtn}
           >
             <Text style={customStyle.visitBtnText}>Visit store</Text>

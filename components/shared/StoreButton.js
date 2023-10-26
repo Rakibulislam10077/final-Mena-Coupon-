@@ -10,6 +10,8 @@ const StoreButton = ({
   data,
   item,
   POitem,
+  storeItem,
+  store__data,
   setIsBottomSheetOpen,
 }) => {
   const navigation = useNavigation();
@@ -20,9 +22,16 @@ const StoreButton = ({
     setClickedButton(true);
     // handlePresentModalPress();
     getRevealedCount(data?._id || POitem?._id || item?._id);
-    navigation.navigate("HomeCouponItem", { ...data, ...POitem, ...item });
+    navigation.navigate("HomeCouponItem", {
+      ...data,
+      ...POitem,
+      ...item,
+      ...storeItem,
+      ...store__data,
+    });
   };
-
+  // console.log(storeItem);
+  // console.log(store__data);
   return (
     <TouchableOpacity
       style={styles.buttonContainer}

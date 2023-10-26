@@ -47,8 +47,8 @@ const Coupon = ({ navigation }) => {
   useEffect(() => {
     setTimeout(() => {
       setRefetchPost((prev) => prev + 1);
-    }, 500);
-  }, [allData]);
+    }, 5000);
+  }, [1, allData]);
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -189,7 +189,7 @@ const Coupon = ({ navigation }) => {
               >
                 <ActivityIndicator size={"small"} color={"#283d27"} />
               </View>
-            ) : allData.length === 0 ? (
+            ) : allData?.length === 0 ? (
               <View
                 style={{
                   alignItems: "center",

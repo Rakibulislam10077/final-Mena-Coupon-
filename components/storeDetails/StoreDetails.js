@@ -14,13 +14,14 @@ const StoreDetails = ({
   POitem,
   data,
   item,
+  storeItem,
+  store__data,
   handlePresentModalPress,
   setIsBottomSheetOpen,
 }) => {
   const navigation = useNavigation();
-
   const description = item?.postDescription || POitem?.postDescription;
-
+  // console.log(storeItem?.storeExternalLink);
   return (
     <View View style={customStyle.storeDetailsCard}>
       <View style={[customStyle.couponBtnImgTextCon]}>
@@ -58,6 +59,8 @@ const StoreDetails = ({
               POitem={POitem}
               data={data}
               item={item}
+              storeItem={storeItem}
+              // store__data={store__data}
             />
           ) : (
             <StoreButton
@@ -65,6 +68,8 @@ const StoreDetails = ({
               POitem={POitem}
               data={data}
               item={item}
+              storeItem={storeItem}
+              // store__data={store__data}
             >
               <Text>Get Code</Text>
             </StoreButton>

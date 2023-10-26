@@ -36,6 +36,7 @@ import {
   useStore,
   useCarousel,
   useReabuildCount,
+  useGetStoreByStoreName,
 } from "../hooks/AllHooks";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -45,19 +46,20 @@ import { width } from "../Utils/CustomWidthAndHeight";
 
 export let refetchHomeStore;
 export let refetchHomePost;
+export let store_data;
 
 const cartWidth = Dimensions.get("window").width;
 const Home = () => {
   const navigation = useNavigation();
   const carouselWidth = Dimensions.get("screen").width;
   const itemWidth = Dimensions.get("window").width;
+  const { getStoreByStoreName } = useGetStoreByStoreName();
   const [refreshing, setRefreshing] = React.useState(false); //for refreshing
   const [index, setIndex] = React.useState(0);
   const isCarousel = React.useRef(null);
   const { allData, setRefetchPost } = useAllcoupon("limit=6");
   const { data, isLoading, setRefetchStore, err } = useStore("limit=15");
   const [visible, setVisible] = React.useState(false);
-
   refetchHomeStore = setRefetchStore;
   refetchHomePost = setRefetchPost;
   const { getRevealedCount } = useReabuildCount();
@@ -101,28 +103,6 @@ const Home = () => {
     };
     getCountry();
   }, []);
-  // ========================reset country function =====================
-  // const handleCountryAsyncEvent = async () => {
-  //   // const getSelectedCouponCountry = await AsyncStorage.getItem("getCountry");
-  //   // if (getSelectedCouponCountry) {
-  //   //   AsyncStorage.removeItem(getSelectedCouponCountry);
-  //   // }
-  //   navigation.navigate("ChooseCountry");
-  // };
-
-  // const handleModalButton = (data) => {
-  //   setClickedButton(true);
-
-  // };
-
-  useEffect(() => {
-    const showModal = () => {
-      if (err) {
-        setVisible(true);
-      }
-    };
-    showModal();
-  }, []);
 
   const hideModal = async () => {
     setRefetchPost((prev) => prev + 1);
@@ -132,7 +112,7 @@ const Home = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       {/* top header */}
       <PaperProvider>
         <View
@@ -141,7 +121,8 @@ const Home = () => {
             width: "100%",
             justifyContent: "space-between",
             alignItems: "center",
-            marginBottom: 5,
+            borderBottomColor: "rgba(0,0,0,0.1)",
+            borderBottomWidth: 5,
             backgroundColor: "#fff",
             height: 70,
           }}
@@ -351,52 +332,54 @@ const Home = () => {
             </TouchableOpacity>
           </View>
 
+          {/* <View
+            style={{
+              backgroundColor: "green",
+              paddingLeft: 10,
+            }}
+          > */}
           <View
             style={{
-              backgroundColor: "#fff",
+              height: 100,
               paddingLeft: 10,
             }}
           >
-            <View
-              style={{
-                height: 110,
-              }}
-            >
-              {isLoading ? (
-                <ActivityIndicator size={"small"} />
-              ) : data.length === 0 ? (
-                <View
-                  style={{
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "100%",
-                  }}
-                >
-                  <Text style={{ color: "#ff0000" }}>empty data</Text>
-                </View>
-              ) : (
-                <FlatList
-                  data={data.sort((a, b) => a - b)}
-                  horizontal
-                  keyExtractor={(item) => item._id}
-                  showsHorizontalScrollIndicator={false}
-                  renderItem={({ item }) => (
-                    <TouchableOpacity
-                      Pressable
-                      onPress={() =>
-                        navigation.navigate("ViewStore", { ...item })
-                      }
-                    >
-                      {/* <View style={styles.topStoersItemImgCon}> */}
-                      <View style={[[styles.topStoersItem]]}>
-                        <Image
-                          resizeMode="contain"
-                          style={styles.topStoresItemImg}
-                          source={{ uri: item?.photoURL }}
-                        />
-                      </View>
-                      {/* </View> */}
-                      {/* <View style={styles.topStoersItemStrNameCon}>
+            {isLoading ? (
+              <ActivityIndicator size={"small"} />
+            ) : data?.length === 0 ? (
+              <View
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "100%",
+                }}
+              >
+                <Text style={{ color: "#ff0000" }}>empty data</Text>
+              </View>
+            ) : err ? (
+              setVisible(true)
+            ) : (
+              <FlatList
+                data={data.sort((a, b) => a - b)}
+                horizontal
+                keyExtractor={(item) => item._id}
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate("ViewStore", { ...item })
+                    }
+                  >
+                    {/* <View style={styles.topStoersItemImgCon}> */}
+                    <View style={[[styles.topStoersItem]]}>
+                      <Image
+                        resizeMode="contain"
+                        style={styles.topStoresItemImg}
+                        source={{ uri: item?.photoURL }}
+                      />
+                    </View>
+                    {/* </View> */}
+                    {/* <View style={styles.topStoersItemStrNameCon}>
                       <Text style={styles.topStoersItemStrName}>
                         {item?.storeName}
                       </Text>
@@ -405,12 +388,12 @@ const Home = () => {
                     <Text style={styles.topStoreTotalPosts}>
                       {item?.totalPosts} offers
                     </Text> */}
-                    </TouchableOpacity>
-                  )}
-                />
-              )}
-            </View>
+                  </TouchableOpacity>
+                )}
+              />
+            )}
           </View>
+          {/* </View> */}
 
           {/* this is carousel section */}
           <View style={styles.carouselContainer}>
@@ -434,7 +417,7 @@ const Home = () => {
                 paddingTop: 0,
                 paddingBottom: 10,
               }}
-              dotsLength={carousels.length}
+              dotsLength={carousels?.length}
               activeDotIndex={index}
               carouselRef={isCarousel}
               dotStyle={styles.carouselDot}
@@ -475,7 +458,7 @@ const Home = () => {
                     style={{ alignSelf: "center" }}
                   />
                 </View>
-              ) : allData.length === 0 ? (
+              ) : allData?.length === 0 ? (
                 <View
                   style={{
                     height: 180,
@@ -495,7 +478,9 @@ const Home = () => {
                       <TouchableOpacity
                         style={styles.imgAndNameSecondCon}
                         onPress={() => {
-                          navigation.navigate("ViewStore", { ...data });
+                          navigation.navigate("ViewStore", {
+                            ...data,
+                          });
                         }}
                       >
                         <Image
@@ -504,7 +489,7 @@ const Home = () => {
                           source={{ uri: data?.store?.photoURL }}
                         />
                         <Text style={styles.storeName}>
-                          {data?.store?.storeName?.slice(0, 15)}..
+                          {data?.store?.storeName?.slice(0, 15)}
                         </Text>
                       </TouchableOpacity>
                     </View>
@@ -545,7 +530,6 @@ const Home = () => {
           <Portal>
             <Modal
               visible={visible}
-              onDismiss={hideModal}
               contentContainerStyle={styles.NoInternetcontainerStyle}
             >
               <View>
@@ -621,19 +605,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginTop: 20,
     borderColor: "#E6E6E6",
-    width: cartWidth < 340 ? 50 : 70,
-    height: cartWidth < 340 ? 50 : 70,
+    width: cartWidth > 400 ? 60 : 50,
+    height: cartWidth > 400 ? 60 : 50,
     borderRadius: 50,
-    padding: 15,
-    // alignContent: "center",
-    // justifyContent: "center",
+    padding: 13,
   },
-  // topStoersItemImgCon: {
-  //   backgroundColor: "red",
-  //   width: "100%",
-  //   height: 50,
-  //   alignSelf: "center",
-  // },
   topStoresItemImg: {
     width: "99%",
     height: "99%",
@@ -668,8 +644,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     height: 250,
     backgroundColor: "#ffffff",
-    marginTop: 5,
-    marginBottom: 5,
+    borderTopColor: "rgba(0,0,0,0.1)",
+    borderTopWidth: 5,
+    borderBottomColor: "rgba(0,0,0,0.1)",
+    borderBottomWidth: 5,
   },
   carouselDot: {
     width: 10,
@@ -704,19 +682,23 @@ const styles = StyleSheet.create({
   },
   imgAndNameMainCon: {
     backgroundColor: "rgba(154, 134, 121, 0.05)",
+    // backgroundColor: "red",
     borderRadius: 5,
-    marginBottom: 20,
-    paddingTop: 17,
-    height: "46%",
+    marginBottom: 10,
+    paddingTop: 14,
+    height: "45%",
   },
   imgAndNameSecondCon: {
     width: "90%",
     height: "100%",
     alignSelf: "center",
+    // justifyContent: "center",
+    alignItems: "center",
+    // backgroundColor: "red",
   },
   bestCouponImg: {
-    width: "60%",
-    height: 60,
+    width: 50,
+    height: 50,
     alignSelf: "center",
     borderRadius: 6,
   },

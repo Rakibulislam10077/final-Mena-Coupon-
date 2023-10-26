@@ -71,7 +71,7 @@ export const customStyle = StyleSheet.create({
     alignItems: "center",
   },
   bttmBtnImg: {
-    width: 50,
+    width: 40,
     height: 40,
     borderRadius: 6,
     marginRight: 15,

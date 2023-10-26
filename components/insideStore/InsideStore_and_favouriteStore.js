@@ -93,7 +93,7 @@ export const InsideStore_and_favouriteStore = ({
         )} */}
       </TouchableOpacity>
       <Text style={customStyle_for_insideStore.storeName}>
-        {item?.storeName?.slice(0, 15) || fvitem?.storeName?.slice(0, 15)}.
+        {item?.storeName?.slice(0, 15) || fvitem?.storeName?.slice(0, 15)}
       </Text>
       <Divider style={{ height: 1, opacity: 0.7, marginTop: 15 }} />
       <Text

@@ -27,8 +27,8 @@ export const customStyle_for_insideStore = StyleSheet.create({
     resizeMode: "contain",
   },
   storeImg: {
-    width: "80%",
-    height: "100%",
+    width: 50,
+    height: 50,
     borderRadius: 10,
   },
   storeEmptyHeart: {

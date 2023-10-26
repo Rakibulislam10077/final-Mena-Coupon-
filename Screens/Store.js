@@ -24,7 +24,6 @@ import {
   useStore,
 } from "../hooks/AllHooks";
 import { InsideStore_and_favouriteStore } from "../components/insideStore/InsideStore_and_favouriteStore";
-import { style } from "deprecated-react-native-prop-types/DeprecatedTextPropTypes";
 // import { FavoriteStoreContext } from "../App";
 export let refetchStoreData;
 const Store = () => {
@@ -149,7 +148,7 @@ const Store = () => {
                 >
                   <ActivityIndicator color={"#797979"} size={"small"} />
                 </View>
-              ) : data.length === 0 ? (
+              ) : data?.length === 0 ? (
                 <View
                   style={{
                     justifyContent: "center",
@@ -173,7 +172,6 @@ const Store = () => {
                           width: 80,
                           alignItems: "center",
                           paddingTop: 15,
-                          marginRight: 10,
                         }}
                         onPress={() =>
                           navigation.navigate("ViewStore", { ...item })
@@ -213,7 +211,7 @@ const Store = () => {
                   >
                     <ActivityIndicator size={"small"} />
                   </View>
-                ) : data.length === 0 ? (
+                ) : data?.length === 0 ? (
                   <View
                     style={{
                       justifyContent: "center",
@@ -297,18 +295,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#000",
     opacity: 0.5,
-    marginLeft: 20,
+    marginLeft: 10,
     marginBottom: 10,
   },
 
   topUsedItem: {
-    width: 70,
-    height: 70,
+    width: 60,
+    height: 60,
     borderRadius: 40,
     shadowColor: "rgba(0,0,0,0.3)",
     elevation: 20,
     backgroundColor: "#fff",
-    marginBottom: 15,
+    marginBottom: 12,
     padding: 15,
   },
   TSimg: {

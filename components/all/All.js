@@ -1,5 +1,5 @@
 import { ActivityIndicator, Text, View } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import StoreDetails from "../storeDetails/StoreDetails";
 import { RefreshControl, ScrollView } from "react-native-gesture-handler";
 import { useQueryCoupon } from "../../hooks/AllHooks";
@@ -11,16 +11,22 @@ const All = ({
   handlePresentModalPress,
   setIsBottomSheetOpen,
   item,
+  store__data,
 }) => {
   const { couponData, isLoading } = useQueryCoupon(storeName, "");
   const [refreshing, setRefreshing] = React.useState(false);
-
+  const [storeItem, setStoreItem] = useState({});
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     setTimeout(() => {
       setRefreshing(false);
     }, 500);
   }, []);
+
+  useEffect(() => {
+    setStoreItem(item);
+  }, []);
+  // console.log(".............from store item", storeItem);
 
   return (
     <ScrollView
@@ -32,7 +38,7 @@ const All = ({
       <View style={{ flex: 1, paddingBottom: 100, paddingHorizontal: 20 }}>
         {isLoading ? (
           <ActivityIndicator style={{ marginTop: 50 }} />
-        ) : couponData.length === 0 ? (
+        ) : couponData?.length === 0 ? (
           <View
             style={{
               height: 320,
@@ -84,6 +90,8 @@ const All = ({
               setIsBottomSheetOpen={setIsBottomSheetOpen}
               key={item._id}
               item={item}
+              storeItem={storeItem}
+              store__data={store__data}
             />
           ))
         )}

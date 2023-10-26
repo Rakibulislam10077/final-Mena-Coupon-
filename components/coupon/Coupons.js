@@ -33,7 +33,7 @@ const Copons = ({
       <View style={{ flex: 1, paddingBottom: 100, paddingHorizontal: 20 }}>
         {isLoading ? (
           <ActivityIndicator style={{ marginTop: 60 }} />
-        ) : couponData.length === 0 ? (
+        ) : couponData?.length === 0 ? (
           <View
             style={{
               height: 320,

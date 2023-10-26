@@ -40,7 +40,7 @@ export const customStyle = StyleSheet.create({
     flex: 2,
   },
   postTitle: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: "bold",
     marginBottom: 10,
   },
