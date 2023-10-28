@@ -178,7 +178,7 @@ export default function HomeCouponItem(props) {
               </Text>
             </TouchableOpacity>
             {data?.postType === "coupon" && (
-              <Text style={{ color: "rgba(0,0,0,0.6)" }}>
+              <Text style={{ color: "rgba(0,0,0,0.6)", textAlign: "center" }}>
                 Don’t forget to use your code during checkout!
               </Text>
             )}

@@ -43,6 +43,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getExpireInAtDays } from "../Utils/formattedDate";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { width } from "../Utils/CustomWidthAndHeight";
+import { DividerStyle } from "../constants/GlobalDividerStyle";
 
 export let refetchHomeStore;
 export let refetchHomePost;
@@ -57,8 +58,10 @@ const Home = () => {
   const [refreshing, setRefreshing] = React.useState(false); //for refreshing
   const [index, setIndex] = React.useState(0);
   const isCarousel = React.useRef(null);
-  const { allData, setRefetchPost } = useAllcoupon("limit=6");
-  const { data, isLoading, setRefetchStore, err } = useStore("limit=15");
+  const { allData, setRefetchPost } = useAllcoupon("limit=10");
+  const { data, isLoading, setRefetchStore, err } = useStore(
+    "limit=15&sortBy=totalPosts"
+  );
   const [visible, setVisible] = React.useState(false);
   refetchHomeStore = setRefetchStore;
   refetchHomePost = setRefetchPost;
@@ -66,7 +69,7 @@ const Home = () => {
   // const { notify } = useNotification();
   const { carousels, setRefetchCarousel } = useCarousel();
   const [countryPhotoURL, setCountryPhotoURL] = useState("");
-  const countrys = [
+  const countries = [
     { id: 1, name: "Qatar", image: require("../assets/images/qatar.png") },
     { id: 2, name: "Oman", image: require("../assets/images/oman.png") },
     {
@@ -96,7 +99,7 @@ const Home = () => {
   useEffect(() => {
     const getCountry = async () => {
       const userCountry = await AsyncStorage.getItem("couponCountry");
-      const selected_country = countrys.find(
+      const selected_country = countries.find(
         (country) => country.name === userCountry
       );
       setCountryPhotoURL(selected_country.image);
@@ -121,10 +124,10 @@ const Home = () => {
             width: "100%",
             justifyContent: "space-between",
             alignItems: "center",
-            borderBottomColor: "rgba(0,0,0,0.1)",
-            borderBottomWidth: 5,
             backgroundColor: "#fff",
             height: 70,
+            shadowColor: "rgba(0,0,0,0.4)",
+            elevation: 10,
           }}
         >
           <View
@@ -316,6 +319,12 @@ const Home = () => {
                 </Svg>
               </TouchableOpacity> */}
         </View>
+        <Divider
+          style={[
+            DividerStyle.commonStyle,
+            { width: "92%", alignSelf: "center" },
+          ]}
+        />
         {/* this is searchbar */}
 
         {/* this is top stores section */}
@@ -356,8 +365,6 @@ const Home = () => {
               >
                 <Text style={{ color: "#ff0000" }}>empty data</Text>
               </View>
-            ) : err ? (
-              setVisible(true)
             ) : (
               <FlatList
                 data={data.sort((a, b) => a - b)}
@@ -396,6 +403,7 @@ const Home = () => {
           {/* </View> */}
 
           {/* this is carousel section */}
+
           <View style={styles.carouselContainer}>
             <Carousel
               containerCustomStyle={{ overflow: "visible" }}
@@ -427,6 +435,7 @@ const Home = () => {
               inactiveDotStyle={{ width: 6, height: 6 }}
             />
           </View>
+
           {/* this is best coupon section */}
 
           <View style={{ paddingTop: 20, backgroundColor: "#fff" }}>
@@ -527,38 +536,6 @@ const Home = () => {
               )}
             </View>
           </View>
-          <Portal>
-            <Modal
-              visible={visible}
-              contentContainerStyle={styles.NoInternetcontainerStyle}
-            >
-              <View>
-                <Image
-                  resizeMode="contain"
-                  source={require("../assets/images/nointernet1.png")}
-                />
-                <Text style={styles.internetModalTitle}>No Internet</Text>
-                <Text style={{ fontSize: 14, color: "rgba(0,0,0,0.6)" }}>
-                  Please check your Internet connetction
-                </Text>
-                <TouchableOpacity
-                  onPress={() => hideModal()}
-                  style={{
-                    backgroundColor: "#283d27",
-                    borderRadius: 25,
-                    height: 50,
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginVertical: 20,
-                  }}
-                >
-                  <Text style={{ fontSize: 18, color: "#fff" }}>
-                    Reload your data
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </Modal>
-          </Portal>
         </ScrollView>
         {/* bottom  */}
         {/* {isBottomSheetOpen && (
@@ -601,19 +578,25 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   topStoersItem: {
-    borderWidth: 1,
+    // borderWidth: 1,
+    backgroundColor: "#fff",
+    shadowColor: "rgba(0,0,0,0.4)",
+    elevation: 10,
     marginHorizontal: 10,
     marginTop: 20,
     borderColor: "#E6E6E6",
-    width: cartWidth > 400 ? 60 : 50,
-    height: cartWidth > 400 ? 60 : 50,
+    width: 60,
+    height: 60,
     borderRadius: 50,
-    padding: 13,
+    marginBottom: 10,
+    // padding: 8,
+    justifyContent: "center",
+    alignItems: "center",
   },
   topStoresItemImg: {
-    width: "99%",
-    height: "99%",
-    borderRadius: 50,
+    width: 40,
+    height: 40,
+    // borderRadius: 50,
   },
   topStoersItemStrNameCon: {
     width: "100%",
@@ -686,7 +669,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 10,
     paddingTop: 14,
-    height: "45%",
+    height: "40%",
   },
   imgAndNameSecondCon: {
     width: "90%",
@@ -697,10 +680,10 @@ const styles = StyleSheet.create({
     // backgroundColor: "red",
   },
   bestCouponImg: {
-    width: 50,
-    height: 50,
+    width: "70%",
+    height: 45,
     alignSelf: "center",
-    borderRadius: 6,
+    // borderRadius: 6,
   },
   storeName: {
     marginTop: 10,
@@ -714,6 +697,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginBottom: 10,
     textAlign: "center",
+    paddingHorizontal: 5,
   },
   exDate: {
     fontSize: 14,

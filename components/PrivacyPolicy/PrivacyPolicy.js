@@ -12,6 +12,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { ClipPath, Defs, G, Path, Rect, Svg } from "react-native-svg";
 import { Divider } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
+import { DividerStyle } from "../../constants/GlobalDividerStyle";
 
 export default function PrivacyPolicy() {
   const navigation = useNavigation();
@@ -24,6 +25,8 @@ export default function PrivacyPolicy() {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
+          shadowColor: "rgba(0,0,0,0.3)",
+          elevation: 13,
         }}
       >
         <View>
@@ -64,7 +67,12 @@ export default function PrivacyPolicy() {
           </TouchableOpacity>
         </View>
       </View>
-      <Divider />
+      <Divider
+        style={[
+          { width: "92%", alignSelf: "center" },
+          DividerStyle.commonStyle,
+        ]}
+      />
       <ScrollView>
         <View style={{ paddingHorizontal: 10, flex: 1, paddingBottom: 100 }}>
           <View>

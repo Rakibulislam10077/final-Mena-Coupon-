@@ -14,7 +14,7 @@ export const customStyle = StyleSheet.create({
     flexDirection: "row",
     paddingLeft: 20,
     paddingTop: 10,
-    paddingBottom: 30,
+    paddingBottom: 20,
   },
   storeImgCon: {
     height: 90,
@@ -31,8 +31,8 @@ export const customStyle = StyleSheet.create({
     paddingLeft: 20,
   },
   storeBrandName: {
-    fontSize: 24,
-    fontWeight: "bold",
+    fontSize: 18,
+    fontWeight: "900",
   },
   ST_and_FV: {
     flex: 2,
@@ -43,6 +43,7 @@ export const customStyle = StyleSheet.create({
     borderRadius: 50,
     padding: 6,
     borderColor: "rgba(0,0,0,0.2)",
+    marginBottom: 10,
   },
   container: {
     flex: 1,
@@ -73,7 +74,6 @@ export const customStyle = StyleSheet.create({
   bttmBtnImg: {
     width: 40,
     height: 40,
-    borderRadius: 6,
     marginRight: 15,
   },
   bttmBtnText: {

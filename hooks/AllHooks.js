@@ -212,7 +212,7 @@ export const useAllcoupon = (type) => {
       return userCountry;
     };
     const getApi = async () => {
-      const url = `${mainURL}/post?country=${await getCountry()}&${type}`;
+      const url = `${mainURL}/post?country=${await getCountry()}&${type}&sortBy=revealed`;
       fetch(`${url}`)
         .then((response) => response.json())
         .then((data) => {

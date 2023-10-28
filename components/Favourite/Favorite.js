@@ -58,7 +58,9 @@ const Favorite = () => {
                 Favorite
               </Text>
             </View>
-            <Divider style={{ height: 2, backgroundColor: "#e6e6e6" }} />
+            <Divider
+              style={{ height: 1, opacity: 0.3, backgroundColor: "#e6e6e6" }}
+            />
           </View>
         </View>
         <View

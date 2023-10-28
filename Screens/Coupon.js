@@ -27,6 +27,7 @@ import {
 import { useAllcoupon } from "../hooks/AllHooks";
 import BottomSheet from "../components/shared/BottomSheet";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import { DividerStyle } from "../constants/GlobalDividerStyle";
 const Coupon = ({ navigation }) => {
   const { allData, loadData, error, setRefetchPost } =
     useAllcoupon("limit=1000");
@@ -68,6 +69,8 @@ const Coupon = ({ navigation }) => {
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "space-between",
+            shadowColor: "rgba(0,0,0,0.3)",
+            elevation: 13,
           }}
         >
           <View
@@ -157,7 +160,12 @@ const Coupon = ({ navigation }) => {
             </View>
           </TouchableOpacity>
         </View>
-        <Divider style={{ width: "90%", alignSelf: "center" }} />
+        <Divider
+          style={[
+            DividerStyle.commonStyle,
+            { width: "90%", alignSelf: "center" },
+          ]}
+        />
         <ScrollView
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />

@@ -18,6 +18,7 @@ import { useUpdateUserInfo } from "../../hooks/AllHooks";
 import { UserContext } from "../../App";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import { DividerStyle } from "../../constants/GlobalDividerStyle";
 // import ImagePicker, { openPicker } from 'react-native-image-crop-picker';
 
 const MyProfile = () => {
@@ -221,7 +222,7 @@ const MyProfile = () => {
               {userInfo?.email}
             </Text>
           </View>
-          <Divider style={{ marginBottom: 30 }} />
+          <Divider style={[DividerStyle.commonStyle, { marginBottom: 30 }]} />
           <View style={customeStyleForMyprofile.inputFieldAndText}>
             <Text style={customeStyleForMyprofile.text}>Phone Number</Text>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -260,7 +261,7 @@ const MyProfile = () => {
               </Text>
             }
           </View>
-          <Divider />
+          <Divider style={[DividerStyle.commonStyle]} />
 
           {!editName ? (
             <TouchableOpacity

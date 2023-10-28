@@ -37,9 +37,9 @@ export const customStyle = StyleSheet.create({
     color: "rgba(0,0,0,0.5)",
   },
   searchTopImgCon: {
-    padding: 13,
-    width: 50,
-    height: 50,
+    padding: 10,
+    width: 60,
+    height: 60,
     backgroundColor: "#fff",
     shadowColor: "rgba(0,0,0,0.3)",
     elevation: 25,

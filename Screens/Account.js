@@ -16,6 +16,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { UserContext } from "../App";
 import { useNavigation } from "@react-navigation/native";
 import { useAllcoupon, useContact, useStore } from "../hooks/AllHooks";
+import ComingSoonAlert from "../components/shared/ComingSoonAlert";
+import { DividerStyle } from "../constants/GlobalDividerStyle";
 
 const Account = () => {
   const navigation = useNavigation();
@@ -372,6 +374,8 @@ const Account = () => {
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "space-between",
+            shadowColor: "rgba(0,0,0,0.3)",
+            elevation: 13,
           }}
         >
           <View
@@ -430,14 +434,16 @@ const Account = () => {
             />
           </TouchableOpacity>
         </View>
-        <Divider style={{ marginBottom: 20 }} />
+        <Divider
+          style={[
+            { marginBottom: 20, width: "92%", alignSelf: "center" },
+            DividerStyle.commonStyle,
+          ]}
+        />
         <TouchableOpacity
-          onPress={() =>
-            Alert.alert(
-              "Coming soon",
-              "Insha-allah, Very soon we will launch V:1.0.1 include so many features. \n\nThank You"
-            )
-          }
+          onPress={() => {
+            return <ComingSoonAlert />;
+          }}
           activeOpacity={0.5}
           style={styles.accountSubCon}
         >
@@ -581,7 +587,17 @@ const Account = () => {
           </View>
           <Text style={styles.text}>Privacy Policy</Text>
         </TouchableOpacity>
-        <Divider style={{ marginBottom: 20, marginTop: 10 }} />
+        <Divider
+          style={[
+            DividerStyle.commonStyle,
+            {
+              marginBottom: 20,
+              marginTop: 10,
+              width: "92%",
+              alignSelf: "center",
+            },
+          ]}
+        />
         <TouchableOpacity
           onPress={() => Linking.openURL(`https://wa.me/${number}`)}
           style={styles.social}
@@ -656,7 +672,17 @@ const Account = () => {
             </Text>
           </View>
         </TouchableOpacity>
-        <Divider style={{ marginBottom: 20, marginTop: 10 }} />
+        <Divider
+          style={[
+            DividerStyle.commonStyle,
+            {
+              marginBottom: 20,
+              marginTop: 10,
+              width: "92%",
+              alignSelf: "center",
+            },
+          ]}
+        />
         <Text
           style={{
             alignSelf: "center",

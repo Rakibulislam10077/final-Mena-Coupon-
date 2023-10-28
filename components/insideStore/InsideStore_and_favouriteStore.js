@@ -1,7 +1,6 @@
 import { Text, TouchableOpacity, View } from "react-native";
 import { Image } from "react-native";
 import { G, Path, Svg } from "react-native-svg";
-import { Divider } from "react-native-paper";
 import { customStyle_for_insideStore } from "./style";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
@@ -11,6 +10,10 @@ import React from "react";
 // import checkIsFavourite from "../../Utils/checkFavourite";
 // import { Dimensions } from "react-native";
 import { Alert } from "react-native";
+import ComingSoonAlert from "../shared/ComingSoonAlert";
+import { CustomDivider } from "../shared/CustomDivider";
+import { Divider } from "react-native-paper";
+import { DividerStyle } from "../../constants/GlobalDividerStyle";
 
 export const InsideStore_and_favouriteStore = ({
   item,
@@ -25,7 +28,7 @@ export const InsideStore_and_favouriteStore = ({
 
   // add and remove
   const addOrRemoveFav = async () => {
-    Alert.alert("coming soon");
+    <ComingSoonAlert />;
     // await fvStoreData(item);
     // await addOrRemoveFavouriteStore(item);
     // setRefetch((prev) => prev + 1);
@@ -93,9 +96,9 @@ export const InsideStore_and_favouriteStore = ({
         )} */}
       </TouchableOpacity>
       <Text style={customStyle_for_insideStore.storeName}>
-        {item?.storeName?.slice(0, 15) || fvitem?.storeName?.slice(0, 15)}
+        {item?.storeName?.slice(0, 20) || fvitem?.storeName?.slice(0, 18)}
       </Text>
-      <Divider style={{ height: 1, opacity: 0.7, marginTop: 15 }} />
+      <Divider style={[DividerStyle.commonStyle, { marginTop: 15 }]} />
       <Text
         style={{
           fontSize: 14,

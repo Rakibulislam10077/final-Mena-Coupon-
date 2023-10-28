@@ -23,6 +23,7 @@ import { useSearch } from "../../hooks/AllHooks";
 import BottomSheet from "../shared/BottomSheet";
 import { height } from "../../Utils/CustomWidthAndHeight";
 import { RefreshControl } from "react-native-gesture-handler";
+import ComingSoonAlert from "../shared/ComingSoonAlert";
 
 const Search = (props) => {
   const item = props?.route?.params;
@@ -74,7 +75,7 @@ const Search = (props) => {
         <View style={customStyle.searchTopImgCon}>
           <Image
             resizeMode="contain"
-            style={{ width: "100%", height: "100%", borderRadius: 50 }}
+            style={{ width: "100%", height: "100%" }}
             source={{ uri: item?.photoURL }}
           />
         </View>
@@ -228,7 +229,7 @@ const Search = (props) => {
                     <Menu.Item
                       style={styles.menuItem}
                       onPress={() => {
-                        return Alert.alert("coming soon");
+                        return <ComingSoonAlert />;
                       }}
                       titleStyle={{ color: "#797979" }}
                       title="Coupon"
@@ -236,7 +237,7 @@ const Search = (props) => {
                     <Menu.Item
                       style={styles.menuItem}
                       onPress={() => {
-                        return Alert.alert("coming soon");
+                        return <ComingSoonAlert />;
                       }}
                       titleStyle={{ color: "#797979" }}
                       title="Deals"

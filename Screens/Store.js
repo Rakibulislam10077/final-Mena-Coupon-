@@ -24,11 +24,13 @@ import {
   useStore,
 } from "../hooks/AllHooks";
 import { InsideStore_and_favouriteStore } from "../components/insideStore/InsideStore_and_favouriteStore";
+import { DividerStyle } from "../constants/GlobalDividerStyle";
 // import { FavoriteStoreContext } from "../App";
 export let refetchStoreData;
 const Store = () => {
   const navigation = useNavigation();
   const [refreshing, setRefreshing] = React.useState(false);
+  const [topStore, setTopStore] = useState([]);
   const { data, isLoading, error, setRefetchStore } = useStore("limit=1000");
   //I forgot how does work it
   // const { favouriteData, error: ferror, setRefetch } = useContext(FavoriteStoreContext)
@@ -40,6 +42,11 @@ const Store = () => {
     setTimeout(() => {
       setRefetchStore((prev) => prev + 1);
     }, 500);
+  }, [data]);
+
+  useEffect(() => {
+    const datas = [...data];
+    setTopStore(datas?.sort((a, b) => (a.totalPosts > b.totalPosts ? -1 : 1)));
   }, [data]);
 
   // refreshing controller
@@ -126,7 +133,12 @@ const Store = () => {
             </View>
           </TouchableOpacity>
         </View>
-        <Divider style={{ width: "90%", alignSelf: "center" }} />
+        <Divider
+          style={[
+            DividerStyle.commonStyle,
+            { width: "92%", alignSelf: "center" },
+          ]}
+        />
 
         {/* this is Top Stores  section*/}
         <ScrollView
@@ -136,7 +148,7 @@ const Store = () => {
         >
           <View style={{ flex: 1, paddingBottom: 100 }}>
             <View style={styles.topStoreCon}>
-              <Text style={styles.topStoreHeading}>Top Used Stores</Text>
+              <Text style={styles.topStoreHeading}>Top Stores</Text>
               {isLoading ? (
                 <View
                   style={{
@@ -161,7 +173,8 @@ const Store = () => {
               ) : (
                 <View>
                   <FlatList
-                    data={data}
+                    // data={data}
+                    data={topStore}
                     horizontal
                     style={{ paddingHorizontal: 10 }}
                     showsHorizontalScrollIndicator={false}
@@ -196,6 +209,12 @@ const Store = () => {
                 </View>
               )}
             </View>
+            <Divider
+              style={[
+                DividerStyle.commonStyle,
+                { width: "92%", alignSelf: "center" },
+              ]}
+            />
             {/* this is all store section */}
             <View style={[styles.allStoreMainCon]}>
               <Text style={styles.allStoreText}>All Stores</Text>
@@ -261,10 +280,14 @@ export default Store;
 const styles = StyleSheet.create({
   headingCon: {
     backgroundColor: "#fff",
-    padding: 20,
+    paddingLeft: 10,
+    paddingRight: 20,
+    height: 70,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    shadowColor: "rgba(0,0,0,0.3)",
+    elevation: 13,
   },
   headingAndArrow: {
     flexDirection: "row",
@@ -288,14 +311,14 @@ const styles = StyleSheet.create({
   topStoreCon: {
     paddingVertical: 20,
     backgroundColor: "#fff",
-    borderBottomColor: "rgba(0,0,0,0.1)",
-    borderBottomWidth: 1,
+    // borderBottomColor: "rgba(0,0,0,0.1)",
+    // borderBottomWidth: 1,
   },
   topStoreHeading: {
     fontSize: 16,
     color: "#000",
     opacity: 0.5,
-    marginLeft: 10,
+    marginLeft: 20,
     marginBottom: 10,
   },
 
@@ -307,12 +330,12 @@ const styles = StyleSheet.create({
     elevation: 20,
     backgroundColor: "#fff",
     marginBottom: 12,
-    padding: 15,
+    padding: 10,
   },
   TSimg: {
     width: "100%",
     height: "100%",
-    borderRadius: 50,
+    // borderRadius: 50,
     alignSelf: "center",
   },
   TStext: {

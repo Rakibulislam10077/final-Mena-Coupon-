@@ -71,6 +71,8 @@ export const customeStyleForMyprofile = StyleSheet.create({
   },
   divider: {
     marginBottom: 30,
+    height: 1,
+    opacity: 0.3,
   },
   editedDivider: {
     backgroundColor: "#000",

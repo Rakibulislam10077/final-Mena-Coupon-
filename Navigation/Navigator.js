@@ -46,7 +46,7 @@ const HomeScreen = () => {
           tabBarStyle: {
             height: 60,
             shadowColor: "#000",
-            elevation: 15,
+            elevation: 13,
             borderTopColor: "#fff",
           },
         }}
@@ -173,7 +173,7 @@ const HomeScreen = () => {
                       fontSize: 12,
                     }}
                   >
-                    Store
+                    Stores
                   </Text>
                 </View>
               );

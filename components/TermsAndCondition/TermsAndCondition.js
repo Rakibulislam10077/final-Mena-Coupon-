@@ -11,6 +11,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ClipPath, Defs, G, Path, Rect, Svg } from "react-native-svg";
 import { Divider } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
+import { DividerStyle } from "../../constants/GlobalDividerStyle";
 
 export default function TermsAndCondition() {
   const navigation = useNavigation();
@@ -23,6 +24,8 @@ export default function TermsAndCondition() {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
+          shadowColor: "rgba(0,0,0,0.3)",
+          elevation: 13,
         }}
       >
         <View>
@@ -63,7 +66,12 @@ export default function TermsAndCondition() {
           </TouchableOpacity>
         </View>
       </View>
-      <Divider />
+      <Divider
+        style={[
+          DividerStyle.commonStyle,
+          { width: "92%", alignSelf: "center" },
+        ]}
+      />
       <ScrollView>
         <View style={{ paddingHorizontal: 10, paddingBottom: 100 }}>
           <View>
