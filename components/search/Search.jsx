@@ -229,7 +229,10 @@ const Search = (props) => {
                     <Menu.Item
                       style={styles.menuItem}
                       onPress={() => {
-                        return <ComingSoonAlert />;
+                        return Alert.alert(
+                          "Coming soon",
+                          "Insha-allah, Very soon we will launch V:1.0.2 include so many features. \n \nThank You"
+                        );;
                       }}
                       titleStyle={{ color: "#797979" }}
                       title="Coupon"
@@ -237,7 +240,10 @@ const Search = (props) => {
                     <Menu.Item
                       style={styles.menuItem}
                       onPress={() => {
-                        return <ComingSoonAlert />;
+                        return Alert.alert(
+                          "Coming soon",
+                          "Insha-allah, Very soon we will launch V:1.0.2 include so many features. \n \nThank You"
+                        );;
                       }}
                       titleStyle={{ color: "#797979" }}
                       title="Deals"

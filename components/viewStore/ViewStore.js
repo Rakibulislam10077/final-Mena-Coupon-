@@ -165,7 +165,10 @@ const ViewStore = (props, isFavourite, storeExternalLink) => {
             <View style={customStyle.ST_and_FV}>
               <TouchableOpacity
                 onPress={() => {
-                  return <ComingSoonAlert />;
+                  return Alert.alert(
+                    "Coming soon",
+                    "Insha-allah, Very soon we will launch V:1.0.2 include so many features. \n \nThank You"
+                  );;
                 }}
                 style={customStyle.startCon}
               >
@@ -192,7 +195,10 @@ const ViewStore = (props, isFavourite, storeExternalLink) => {
               <TouchableOpacity
                 // onPress={() => addOrRemoveFav(item)}
                 onPress={() => {
-                  return <ComingSoonAlert />;
+                  return Alert.alert(
+                    "Coming soon",
+                    "Insha-allah, Very soon we will launch V:1.0.2 include so many features. \n \nThank You"
+                  );;
                 }}
                 style={customStyle.startCon}
               >

@@ -126,8 +126,8 @@ const Home = () => {
             alignItems: "center",
             backgroundColor: "#fff",
             height: 70,
-            shadowColor: "rgba(0,0,0,0.4)",
-            elevation: 10,
+            shadowColor: "rgba(0,0,0,0.2)",
+            elevation: 14,
           }}
         >
           <View

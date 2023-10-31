@@ -442,7 +442,10 @@ const Account = () => {
         />
         <TouchableOpacity
           onPress={() => {
-            return <ComingSoonAlert />;
+            return Alert.alert(
+              "Coming soon",
+              "Insha-allah, Very soon we will launch V:1.0.2 include so many features. \n \nThank You"
+            );
           }}
           activeOpacity={0.5}
           style={styles.accountSubCon}

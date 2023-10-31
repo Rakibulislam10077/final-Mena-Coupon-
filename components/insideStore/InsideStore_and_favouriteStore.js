@@ -28,7 +28,10 @@ export const InsideStore_and_favouriteStore = ({
 
   // add and remove
   const addOrRemoveFav = async () => {
-    <ComingSoonAlert />;
+    Alert.alert(
+      "Coming soon",
+      "Insha-allah, Very soon we will launch V:1.0.2 include so many features. \n \nThank You"
+    );
     // await fvStoreData(item);
     // await addOrRemoveFavouriteStore(item);
     // setRefetch((prev) => prev + 1);
